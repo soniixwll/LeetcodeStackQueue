@@ -26,19 +26,28 @@ class Queue:
 class MyStack:
 
     def __init__(self):
-        pass
+        self.queue_in = Queue()
+        self.queue_out = Queue()
 
     def push(self, x: int) -> None:
-        pass
+        self.queue_in.push(x)
 
     def pop(self) -> int:
-        pass
+        if not self.queue_in.is_empty():
+            while self.queue_in.size() > 1:
+                self.queue_out.push(self.queue_in.pop())
+
+        return self.queue_in.pop()
 
     def top(self) -> int:
-        pass
+        if not self.queue_in.is_empty():
+            while self.queue_in.size() > 1:
+                self.queue_out.push(self.queue_in.pop())
+
+        return self.queue_in.peek()
 
     def empty(self) -> bool:
-        pass
+        return  self.queue_in.is_empty() and self.queue_out.is_empty()
 
 
 # Your MyStack object will be instantiated and called as such:
