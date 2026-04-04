@@ -60,17 +60,13 @@ class FreqStack:
 
     def pop(self):
         freq = max(self.freq_dict.values())
-        for key in self.freq_dict.keys():
-            if self.freq_dict[key] == freq:
-                freq_number = key
-                break
 
         probe = Stack()
 
         while not self.stack.is_empty():
             thing = self.stack.pop()
 
-            if thing == freq_number:
+            if self.freq_dict[thing] == freq:
                 self.freq_dict[thing] -= 1
                 break
 
