@@ -1,3 +1,28 @@
+from collections import deque
+
+class Queue:
+    def __init__(self):
+        self.queue = deque()
+
+    def push(self, x):
+        self.queue.append(x)
+
+    def pop(self):
+        if len(self.queue) != 0:
+            return self.queue.popleft()
+        return False
+
+    def peek(self):
+        return self.queue[0]
+
+    def size(self):
+        return len(self.queue)
+
+    def is_empty(self):
+        if len(self.queue) == 0:
+            return True
+        return False
+
 class MyStack:
 
     def __init__(self):
