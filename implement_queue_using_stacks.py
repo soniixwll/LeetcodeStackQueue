@@ -32,14 +32,14 @@ class MyQueue:
 
     def pop(self) -> int:
         if  self.stack_for_out.size() == 0:
-            while self.stack_for_in:
+            while not self.stack_for_in.is_empty():
                 self.stack_for_out.push(self.stack_for_in.pop())
 
         return self.stack_for_out.pop()
 
     def peek(self) -> int:
         if  self.stack_for_out.size() == 0:
-            while self.stack_for_in:
+            while not self.stack_for_in.is_empty():
                 self.stack_for_out.push(self.stack_for_in.pop())
 
         return self.stack_for_out.peek()
