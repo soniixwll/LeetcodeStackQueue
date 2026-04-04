@@ -1,4 +1,5 @@
 from collections import deque
+from collections import defaultdict
 
 class Stack:
     def __init__(self):
@@ -50,12 +51,35 @@ class Queue:
 class FreqStack:
 
     def __init__(self):
-
+        self.stack = Stack()
+        self.freq_dict = defaultdict(int)
 
     def push(self, val: int) -> None:
+        self.stack.push(val)
+        self.freq_dict[val] += 1
 
+    def pop(self):
+        freq = max(self.freq_dict.values())
+        for key in self.freq_dict.keys():
+            if self.freq_dict[key] == freq:
+                freq_number = key
+                break
 
-    def pop(self) -> int:
+        probe = Stack()
+
+        while not self.stack.is_empty():
+            thing = self.stack.pop()
+
+            if thing == freq_number:
+                self.freq_dict[thing] -= 1
+                break
+
+            probe.push(thing)
+
+        while not probe.is_empty():
+            self.stack.push(probe.pop())
+
+        return thing
 
 
 
