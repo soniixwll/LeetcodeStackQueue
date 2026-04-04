@@ -13,7 +13,8 @@ class Stack:
         self.stack.append(item)
 
     def pop(self):
-        return self.stack.pop()
+        if len(self.stack) != 0:
+            return self.stack.pop()
 
     def peek(self):
         return self.stack[-1]
