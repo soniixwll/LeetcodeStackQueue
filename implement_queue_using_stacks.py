@@ -1,6 +1,8 @@
+from collections import deque
+
 class Stack:
     def __init__(self):
-        self.stack = []
+        self.stack = deque()
 
     def is_empty(self):
         if len(self.stack) == 0:
@@ -16,24 +18,33 @@ class Stack:
     def peek(self):
         return self.stack[-1]
 
-    def __len__(self):
+    def size(self):
         return len(self.stack)
 
 class MyQueue:
 
     def __init__(self):
-
-
+        self.stack_for_in = Stack()
+        self.stack_for_out = Stack()
     def push(self, x: int) -> None:
-
+        self.stack_for_in.push(x)
 
     def pop(self) -> int:
+        if  self.stack_for_out.size() == 0:
+            while self.stack_for_in:
+                self.stack_for_out.push(self.stack_for_in.pop())
 
+        return self.stack_for_out.pop()
 
     def peek(self) -> int:
+        if  self.stack_for_out.size() == 0:
+            while self.stack_for_in:
+                self.stack_for_out.push(self.stack_for_in.pop())
 
+        return self.stack_for_out.peek()
 
     def empty(self) -> bool:
+        return self.stack_for_in.is_empty() and self.stack_for_out.is_empty()
 
 
 
