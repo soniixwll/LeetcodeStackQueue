@@ -1,26 +1,48 @@
-from collections import deque
+# from collections import deque
+class Node:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 
 class Stack:
     def __init__(self):
-        self.stack = deque()
+        self.head = None
+        # self.stack = None
+
+        self._size = 0
 
     def is_empty(self):
-        if len(self.stack) == 0:
+        if self._size == 0:
             return True
         return False
 
     def push(self, item):
-        self.stack.append(item)
+        new_node = Node(item)
+
+        new_node.next = self.head
+        self.head = new_node
+
+        self._size += 1
 
     def pop(self):
-        if len(self.stack) != 0:
-            return self.stack.pop()
+        if self.head is None:
+            return False
+
+        removed_thing = self.head.val
+        self.head = self.head.next
+
+        self._size -= 1
+
+        return removed_thing
 
     def peek(self):
-        return self.stack[-1]
+        if self.head is None:
+            return False
+        peek = self.head.val
 
+        return peek
     def size(self):
-        return len(self.stack)
+        return self._size
 
 class MyQueue:
 
